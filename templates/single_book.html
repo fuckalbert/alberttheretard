@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2>{{ book.name }}</h2>
+            <img style="width: 300px; height: 155px;" class="card-img-top float-right" src="{% if game.img %}{{ game.img.url }}{% else %}{% static 'img/default_book.jpg' %}{% endif %}" alt="Card image cap">
+            <ul>
+                {% if game.genre %}
+                    <li><b>Genre:</b> {{ game.get_genre_display }}</li>
+                {% endif %}
+                {% if game.publisher %}
+                    <li><b>Publisher:</b> {{ game.publisher }}</li>
+                {% endif %}
+                {% if game.year %}
+                    <li><b>Year:</b> {{ game.year }}</li>
+                {% endif %}
+                {% if game.developer %}
+                    <li><b>=Developer</b> {{ game.author.username }}</li>
+                {% endif %}
+                {% if game.url %}
+                    <li><b>Buy:</b> <a href="{{ game.url }}">here</a></li>
+                {% endif %}
+            </ul>
+            {% if game.description %}
+                <span><b>Description:</b></span>
+                <p>{{ game.description }}</p>
+            {% endif %}
+            {% if game.comment_set.all %}
+            <h3>Chat</h3>
+            {% endif %}git remote add origin https://github.com/fuckalbert/alberttheretard.gitgit remote add origin https://github.com/fuckalbert/alberttheretard.git
+            {% for comment in game.comment_set.all %}
+            <p>
+                <p>{{ comment.created }}</p>
+                <p>{{ comment.author.username }}</p>
+                <p>{{ comment.text }}</p>
+            </p>
+            <hr>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+            <h3>Add message</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

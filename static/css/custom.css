@@ -1,0 +1,7 @@
+.form-group.is-invalid input, .form-group.is-invalid select {
+    border-color: #dc3545;
+}
+.card-img-top{
+    transition: all 0.3s ease-in-out;
+}
+.card-img-top:hover { transform: scale(1.1); }

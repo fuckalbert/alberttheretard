@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Games</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'add_book' %}">Request game</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav float-right">
+      {% if not request.user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {% else %}
+        <li class="nav-item mr-2">
+          <b>Hello {{request.user.username }}</b>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      {% endif %}
+    </ul>
+     <form class="form-inline" action="{% url 'main_page' %}">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ search }}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<br>

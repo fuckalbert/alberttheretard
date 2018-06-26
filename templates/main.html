@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+    {% for game in games %}
+        <div class="col-4">
+            <div class="card mb-4" style="width: 18rem;">
+            <img style="height: 145px" class="card-img-top" src="{% if game.img %}{{ game.img.url }}{% else %}{% static 'img/default_book.jpg' %}{% endif %}" alt="Card image cap">
+              <div class="card-body">
+                <h6 class="card-title"><a href="{% url 'single_book' game.id %}">{{ game.name }}</a></h6>
+                <p class="card-text">
+                    <b>Genre:</b> <span>{{ game.get_genre_display }}</span>
+                </p>
+              </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                Game not found :(
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
